@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>فيكسيجو — مستقبل التبريد الذكي</title>
+<meta name="description" content="فيكسيجو — خدمات صيانة وتركيب وتنظيف مكيفات في بريدة وعنيزة والقصيم">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;900&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{
+  --ice:#f0f7ff;
+  --ice2:#e4f0fc;
+  --blue:#2563eb;
+  --blue2:#1d4ed8;
+  --cyan:#06b6d4;
+  --cyan2:#0891b2;
+  --silver:#94a3b8;
+  --dark:#0f172a;
+  --mid:#1e293b;
+  --glass:rgba(255,255,255,0.72);
+  --glass2:rgba(255,255,255,0.45);
+  --shadow:0 8px 32px rgba(37,99,235,0.12);
+  --shadow2:0 24px 64px rgba(37,99,235,0.18);
+  --r:20px;
+  --r2:14px;
+}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:'Cairo',sans-serif;background:#f8fafc;color:var(--dark);overflow-x:hidden;direction:rtl}
+.page{display:none;min-height:100vh;animation:fadeIn .5s ease}
+.page.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+
+/* NAV */
+nav{position:fixed;top:0;right:0;left:0;z-index:999;backdrop-filter:blur(24px) saturate(180%);-webkit-backdrop-filter:blur(24px) saturate(180%);background:rgba(255,255,255,0.88);border-bottom:1px solid rgba(37,99,235,0.1);padding:0 20px;height:66px;display:flex;align-items:center;justify-content:space-between}
+.logo{font-family:'Tajawal',sans-serif;font-weight:900;font-size:1.5rem;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-0.5px}
+.nav-links{display:none}
+.burger{width:40px;height:40px;display:flex;flex-direction:column;justify-content:center;gap:6px;cursor:pointer;background:none;border:none;padding:4px}
+.burger span{display:block;height:2px;background:var(--dark);border-radius:2px;transition:all .3s}
+.burger.open span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+.burger.open span:nth-child(2){opacity:0}
+.burger.open span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+
+/* MOBILE MENU */
+.mobile-menu{position:fixed;inset:0;z-index:998;background:rgba(255,255,255,0.97);backdrop-filter:blur(20px);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;transform:translateY(-100%);transition:transform .45s cubic-bezier(.16,1,.3,1);pointer-events:none}
+.mobile-menu.open{transform:translateY(0);pointer-events:all}
+.mobile-menu a{font-family:'Tajawal',sans-serif;font-size:2rem;font-weight:700;color:var(--dark);text-decoration:none;padding:12px 40px;border-radius:var(--r);transition:all .2s;position:relative}
+.mobile-menu a::after{content:'';position:absolute;bottom:10px;right:40px;left:40px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px;transform:scaleX(0);transition:transform .3s}
+.mobile-menu a:hover::after,.mobile-menu a.active::after{transform:scaleX(1)}
+.mobile-menu a.active{color:var(--blue)}
+.menu-cta{margin-top:20px;background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff!important;padding:16px 48px!important;border-radius:50px!important}
+.menu-cta::after{display:none!important}
+
+/* BOTTOM NAV */
+.bottom-nav{position:fixed;bottom:0;right:0;left:0;z-index:997;background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(37,99,235,0.1);display:grid;grid-template-columns:repeat(4,1fr);padding-bottom:env(safe-area-inset-bottom)}
+.bnav-item{display:flex;flex-direction:column;align-items:center;padding:10px 4px 8px;cursor:pointer;transition:all .2s;border:none;background:none}
+.bnav-item svg{width:22px;height:22px;stroke:var(--silver);transition:all .2s}
+.bnav-item span{font-size:.62rem;color:var(--silver);margin-top:3px;font-weight:500;transition:all .2s}
+.bnav-item.active svg{stroke:var(--blue)}
+.bnav-item.active span{color:var(--blue)}
+
+/* SECTIONS BASE */
+.hero-wrap{padding-top:66px}
+section{padding:60px 20px}
+.section-label{font-size:.75rem;letter-spacing:3px;color:var(--cyan2);text-transform:uppercase;font-weight:600;margin-bottom:10px}
+.section-title{font-family:'Tajawal',sans-serif;font-size:1.9rem;font-weight:900;line-height:1.25;color:var(--dark)}
+.section-sub{font-size:1rem;color:#64748b;line-height:1.8;margin-top:12px}
+.gradient-text{background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+
+/* HERO */
+.hero{background:linear-gradient(160deg,#f0f9ff 0%,#e0f2fe 50%,#f0f7ff 100%);min-height:calc(100vh - 66px);display:flex;flex-direction:column;justify-content:center;padding:40px 24px 100px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;top:-80px;right:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(6,182,212,0.15),transparent 70%);border-radius:50%}
+.hero::after{content:'';position:absolute;bottom:40px;left:-60px;width:200px;height:200px;background:radial-gradient(circle,rgba(37,99,235,0.1),transparent 70%);border-radius:50%}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(6,182,212,0.1);border:1px solid rgba(6,182,212,0.25);border-radius:50px;padding:6px 16px;font-size:.8rem;font-weight:600;color:var(--cyan2);margin-bottom:24px}
+.hero-badge-dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse2 2s infinite}
+@keyframes pulse2{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.4)}}
+.hero h1{font-family:'Tajawal',sans-serif;font-size:2.1rem;font-weight:900;line-height:1.2;color:var(--dark);margin-bottom:18px;position:relative;z-index:1}
+.hero-sub{font-size:1rem;color:#475569;line-height:1.85;margin-bottom:32px;position:relative;z-index:1}
+.btn-primary{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,var(--blue),var(--blue2));color:#fff;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;padding:17px 32px;border-radius:50px;border:none;cursor:pointer;text-decoration:none;transition:all .3s;box-shadow:0 6px 24px rgba(37,99,235,0.35)}
+.btn-primary:active{transform:scale(.97)}
+.btn-secondary{display:flex;align-items:center;justify-content:center;gap:10px;background:rgba(255,255,255,0.8);color:var(--dark);font-family:'Cairo',sans-serif;font-size:1rem;font-weight:600;padding:16px 28px;border-radius:50px;border:1.5px solid rgba(37,99,235,0.2);cursor:pointer;text-decoration:none;transition:all .3s;backdrop-filter:blur(10px)}
+.btn-wa{display:flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;font-family:'Cairo',sans-serif;font-size:1rem;font-weight:700;padding:17px 32px;border-radius:50px;border:none;cursor:pointer;text-decoration:none;transition:all .3s;box-shadow:0 6px 24px rgba(37,211,102,0.35)}
+.hero-btns{display:flex;flex-direction:column;gap:14px}
+
+/* STATS */
+.stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:40px}
+.stat-card{background:var(--glass);backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,0.6);border-radius:var(--r2);padding:20px 16px;text-align:center;box-shadow:0 4px 16px rgba(37,99,235,0.08)}
+.stat-num{font-family:'Tajawal',sans-serif;font-size:2rem;font-weight:900;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.stat-lbl{font-size:.78rem;color:#64748b;font-weight:500;margin-top:4px}
+
+/* SERVICE PREVIEW CARDS */
+.services-preview{display:flex;flex-direction:column;gap:16px;margin-top:32px}
+.svc-card{background:#fff;border-radius:var(--r);padding:22px 20px;border:1px solid rgba(37,99,235,0.08);box-shadow:0 2px 12px rgba(37,99,235,0.06);display:flex;gap:16px;align-items:flex-start;transition:all .3s;cursor:pointer}
+.svc-card:active{transform:scale(.98)}
+.svc-icon{width:50px;height:50px;background:linear-gradient(135deg,var(--ice),var(--ice2));border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
+.svc-card h3{font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:4px}
+.svc-card p{font-size:.85rem;color:#64748b;line-height:1.6}
+
+/* TRUST SECTION */
+.trust-section{background:linear-gradient(135deg,var(--dark),var(--mid));color:#fff;border-radius:24px;padding:40px 24px;margin:0 -4px}
+.trust-section .section-label{color:rgba(6,182,212,0.9)}
+.trust-section .section-title{color:#fff}
+.trust-section .section-sub{color:rgba(255,255,255,0.7)}
+.trust-badges{display:flex;flex-direction:column;gap:12px;margin-top:28px}
+.trust-badge{display:flex;align-items:center;gap:14px;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:14px;padding:16px 18px}
+.trust-badge-icon{font-size:1.4rem}
+.trust-badge-text{font-size:.9rem;color:rgba(255,255,255,0.85);font-weight:500}
+
+/* TESTIMONIALS */
+.testi-scroll{display:flex;flex-direction:column;gap:16px;margin-top:28px}
+.testi-card{background:#fff;border-radius:var(--r);padding:24px 20px;border:1px solid rgba(37,99,235,0.08);box-shadow:var(--shadow)}
+.testi-stars{color:#f59e0b;font-size:1.1rem;margin-bottom:10px}
+.testi-text{font-size:.92rem;color:#475569;line-height:1.8;margin-bottom:14px}
+.testi-author{display:flex;align-items:center;gap:10px}
+.testi-avatar{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--blue),var(--cyan));display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;font-size:.9rem;flex-shrink:0}
+.testi-name{font-weight:600;font-size:.9rem;color:var(--dark)}
+.testi-city{font-size:.78rem;color:var(--silver)}
+
+/* CTA SECTION */
+.cta-section{background:linear-gradient(135deg,var(--blue),var(--cyan2));border-radius:24px;padding:40px 24px;text-align:center;margin:0 -4px;color:#fff}
+.cta-section h2{font-family:'Tajawal',sans-serif;font-size:1.75rem;font-weight:900;margin-bottom:12px}
+.cta-section p{font-size:.95rem;opacity:.9;margin-bottom:28px;line-height:1.7}
+.cta-phone{display:flex;align-items:center;justify-content:center;gap:10px;font-size:1.4rem;font-weight:700;margin-bottom:24px;direction:ltr}
+
+/* FOOTER */
+footer{background:var(--dark);color:rgba(255,255,255,0.6);padding:40px 24px 120px;margin-top:0}
+.footer-logo{font-family:'Tajawal',sans-serif;font-weight:900;font-size:1.6rem;background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;margin-bottom:10px}
+.footer-desc{font-size:.85rem;line-height:1.8;margin-bottom:24px}
+.footer-areas{font-size:.82rem;color:rgba(255,255,255,0.5);line-height:2}
+.footer-bottom{border-top:1px solid rgba(255,255,255,0.1);margin-top:28px;padding-top:20px;font-size:.78rem;color:rgba(255,255,255,0.35);text-align:center}
+
+/* ======= SERVICES PAGE ======= */
+.services-hero{background:linear-gradient(160deg,#0f172a 0%,#1e3a5f 60%,#0c2340 100%);min-height:45vh;display:flex;flex-direction:column;justify-content:flex-end;padding:80px 24px 40px;position:relative;overflow:hidden}
+.services-hero::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(circle at 80% 30%,rgba(6,182,212,0.15),transparent 60%)}
+.services-hero .section-label{color:rgba(6,182,212,0.9)}
+.services-hero h1{font-family:'Tajawal',sans-serif;font-size:2.2rem;font-weight:900;color:#fff;line-height:1.2;position:relative;z-index:1}
+.services-hero p{color:rgba(255,255,255,0.7);font-size:.95rem;line-height:1.8;margin-top:12px;position:relative;z-index:1}
+.svc-full-card{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 4px 24px rgba(37,99,235,0.1);margin-bottom:24px}
+.svc-full-header{background:linear-gradient(135deg,var(--blue),var(--cyan2));padding:28px 24px;color:#fff}
+.svc-full-header h2{font-family:'Tajawal',sans-serif;font-size:1.5rem;font-weight:900;margin-bottom:6px;display:flex;align-items:center;gap:12px}
+.svc-full-header p{font-size:.88rem;opacity:.9;line-height:1.7}
+.svc-full-body{padding:24px}
+.svc-desc{font-size:.92rem;color:#475569;line-height:1.9;margin-bottom:20px}
+.svc-features{display:flex;flex-direction:column;gap:10px}
+.svc-feature{display:flex;align-items:flex-start;gap:10px;font-size:.88rem;color:var(--dark)}
+.svc-feature::before{content:'✓';background:linear-gradient(135deg,var(--blue),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;font-size:1rem;flex-shrink:0;margin-top:1px}
+.svc-price-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,rgba(37,99,235,0.1),rgba(6,182,212,0.1));border:1px solid rgba(37,99,235,0.2);border-radius:50px;padding:8px 20px;font-size:.85rem;font-weight:600;color:var(--blue);margin-top:18px}
+.areas-section{background:linear-gradient(135deg,var(--dark),var(--mid));color:#fff;border-radius:24px;padding:36px 24px;margin:0 0 24px}
+.areas-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.area-pill{background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:12px 8px;text-align:center;font-size:.82rem;color:rgba(255,255,255,0.85);font-weight:500}
+
+/* ======= ABOUT PAGE ======= */
+.about-hero{background:linear-gradient(160deg,#ecfdf5 0%,#d1fae5 40%,#e0f2fe 100%);min-height:50vh;display:flex;flex-direction:column;justify-content:flex-end;padding:90px 24px 44px;position:relative;overflow:hidden}
+.about-hero::before{content:'';position:absolute;top:-60px;left:-60px;width:250px;height:250px;background:radial-gradient(circle,rgba(37,99,235,0.12),transparent 70%);border-radius:50%}
+.about-hero h1{font-family:'Tajawal',sans-serif;font-size:2rem;font-weight:900;color:var(--dark);position:relative;z-index:1}
+.about-hero p{color:#475569;font-size:.95rem;line-height:1.8;margin-top:12px;position:relative;z-index:1}
+.story-card{background:#fff;border-radius:24px;padding:28px 22px;border:1px solid rgba(37,99,235,0.08);box-shadow:var(--shadow);margin-bottom:20px}
+.story-card h2{font-family:'Tajawal',sans-serif;font-size:1.4rem;font-weight:900;color:var(--dark);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.story-card p{font-size:.92rem;color:#475569;line-height:1.9}
+.values-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+.value-card{background:#fff;border-radius:18px;padding:20px 16px;border:1px solid rgba(37,99,235,0.08);box-shadow:0 2px 12px rgba(37,99,235,0.05);text-align:center}
+.value-icon{font-size:1.8rem;margin-bottom:10px}
+.value-title{font-family:'Tajawal',sans-serif;font-size:1rem;font-weight:700;color:var(--dark);margin-bottom:6px}
+.value-desc{font-size:.8rem;color:#64748b;line-height:1.6}
+.about-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:28px}
+.about-stat{background:linear-gradient(135deg,var(--dark),var(--mid));border-radius:18px;padding:24px 16px;text-align:center}
+.about-stat-num{font-family:'Tajawal',sans-serif;font-size:2.2rem;font-weight:900;background:linear-gradient(135deg,var(--cyan),#fff);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.about-stat-lbl{font-size:.8rem;color:rgba(255,255,255,0.6);margin-top:4px}
+
+/* ======= CONTACT PAGE ======= */
+.contact-hero{background:linear-gradient(160deg,#fdf4ff 0%,#ede9fe 40%,#e0f2fe 100%);min-height:44vh;display:flex;flex-direction:column;justify-content:flex-end;padding:90px 24px 40px;position:relative;overflow:hidden}
+.contact-hero h1{font-family:'Tajawal',sans-serif;font-size:2rem;font-weight:900;color:var(--dark)}
+.contact-hero p{color:#475569;font-size:.95rem;line-height:1.8;margin-top:10px}
+.contact-card{background:#fff;border-radius:24px;padding:24px 20px;border:1px solid rgba(37,99,235,0.08);box-shadow:var(--shadow);margin-bottom:18px}
+.contact-card h3{font-family:'Tajawal',sans-serif;font-size:1.2rem;font-weight:700;color:var(--dark);margin-bottom:18px;display:flex;align-items:center;gap:8px}
+.contact-method{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(37,99,235,0.06)}
+.contact-method:last-child{border-bottom:none}
+.contact-method-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
+.cm-blue{background:rgba(37,99,235,0.1)}
+.cm-green{background:rgba(37,211,102,0.1)}
+.contact-method-info{flex:1}
+.contact-method-label{font-size:.78rem;color:var(--silver);font-weight:500}
+.contact-method-value{font-size:.95rem;font-weight:600;color:var(--dark)}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:.82rem;font-weight:600;color:var(--dark);margin-bottom:7px}
+.form-group input,.form-group textarea,.form-group select{width:100%;background:#f8fafc;border:1.5px solid rgba(37,99,235,0.12);border-radius:12px;padding:14px 16px;font-family:'Cairo',sans-serif;font-size:.95rem;color:var(--dark);outline:none;transition:all .2s;-webkit-appearance:none}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--blue);background:#fff;box-shadow:0 0 0 4px rgba(37,99,235,0.08)}
+.form-group textarea{resize:vertical;min-height:110px}
+.hours-grid{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.hour-row{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid rgba(37,99,235,0.06)}
+.hour-row:last-child{border-bottom:none}
+.hour-day{font-size:.88rem;color:#475569}
+.hour-time{font-size:.88rem;font-weight:600;color:var(--blue)}
+.map-placeholder{background:linear-gradient(135deg,var(--ice),var(--ice2));border-radius:18px;height:180px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;font-size:1rem;color:var(--blue);font-weight:600;border:2px dashed rgba(37,99,235,0.2)}
+
+@media(min-width:700px){
+  .stats-grid{grid-template-columns:repeat(4,1fr)}
+  .hero h1{font-size:2.8rem}
+  .hero-btns{flex-direction:row}
+  .values-grid{grid-template-columns:repeat(3,1fr)}
+  .about-stats{grid-template-columns:repeat(4,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">فيكسيجو</span>
+  <button class="burger" id="burger" aria-label="القائمة">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#" class="active" onclick="navigate('home');closeMobileMenu()">الرئيسية</a>
+  <a href="#" onclick="navigate('services');closeMobileMenu()">خدماتنا</a>
+  <a href="#" onclick="navigate('about');closeMobileMenu()">من نحن</a>
+  <a href="#" onclick="navigate('contact');closeMobileMenu()">تواصل معنا</a>
+  <a href="https://wa.me/966558524317" class="menu-cta">واتساب مباشر 💬</a>
+</div>
+
+<!-- ============ PAGE: HOME ============ -->
+<div class="page active" id="page-home">
+  <div class="hero-wrap">
+    <section class="hero">
+      <div class="hero-badge"><span class="hero-badge-dot"></span> خدمات تبريد احترافية في القصيم</div>
+      <h1>فيكسيجو —<br><span class="gradient-text">مستقبل التبريد الذكي</span><br>والراحة المتكاملة</h1>
+      <p class="hero-sub">الشريك الأول والأكثر ثقة لصيانة وتركيب وتنظيف المكيفات في بريدة وعنيزة والقصيم. خبرة تتحدث عن نفسها، وجودة لا تُجارى.</p>
+      <div class="hero-btns">
+        <a href="tel:0558524317" class="btn-primary">📞 احجز الخدمة الآن</a>
+        <a href="https://wa.me/966558524317" class="btn-wa">💬 واتساب مباشر</a>
+        <button class="btn-secondary" onclick="navigate('services')">✦ استكشف خدماتنا</button>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-label">إنجازاتنا بالأرقام</div>
+      <div class="section-title">ثقة <span class="gradient-text">آلاف العائلات</span></div>
+      <div class="stats-grid">
+        <div class="stat-card"><div class="stat-num">+3000</div><div class="stat-lbl">عميل راضٍ</div></div>
+        <div class="stat-card"><div class="stat-num">+10</div><div class="stat-lbl">سنوات خبرة</div></div>
+        <div class="stat-card"><div class="stat-num">6</div><div class="stat-lbl">مدن في القصيم</div></div>
+        <div class="stat-card"><div class="stat-num">24/7</div><div class="stat-lbl">طوارئ متاح</div></div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="section-label">ما نقدمه</div>
+      <div class="section-title">خدماتنا <span class="gradient-text">المتميزة</span></div>
+      <div class="section-sub">نقدم باقة متكاملة من خدمات التبريد بأعلى معايير الجودة والاحترافية.</div>
+      <div class="services-preview">
+        <div class="svc-card" onclick="navigate('services')">
+          <div class="svc-icon">🔧</div>
+          <div><h3>صيانة المكيفات</h3><p>صيانة دورية واحترافية لضمان الكفاءة المثلى لمكيفك وإطالة عمره الافتراضي.</p></div>
+        </div>
+        <div class="svc-card" onclick="navigate('services')">
+          <div class="svc-icon">⚙️</div>
+          <div><h3>فك وتركيب المكيفات</h3><p>تركيب دقيق واحترافي لجميع أنواع وأحجام المكيفات المنزلية والتجارية.</p></div>
+        </div>
+        <div class="svc-card" onclick="navigate('services')">
+          <div class="svc-icon">💧</div>
+          <div><h3>غسيل وتنظيف المكيفات</h3><p>تنظيف عميق بمعدات متطورة لهواء نقي ومكيف يعمل بكفاءة عالية.</p></div>
+        </div>
+        <div class="svc-card" onclick="navigate('services')">
+          <div class="svc-icon">❄️</div>
+          <div><h3>تعبئة فريون وكشف أعطال</h3><p>تشخيص دقيق وإصلاح فوري لجميع مشاكل التبريد والفريون.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="trust-section">
+        <div class="section-label">لماذا فيكسيجو</div>
+        <div class="section-title" style="color:#fff">نحن <span style="color:var(--cyan)">الخيار الأول</span> لعائلتك</div>
+        <div class="trust-badges">
+          <div class="trust-badge"><span class="trust-badge-icon">🛡️</span><span class="trust-badge-text">ضمان شامل على جميع الخدمات</span></div>
+          <div class="trust-badge"><span class="trust-badge-icon">⚡</span><span class="trust-badge-text">فريق فني متخصص ومعتمد</span></div>
+          <div class="trust-badge"><span class="trust-badge-icon">🕐</span><span class="trust-badge-text">خدمة طوارئ على مدار الساعة</span></div>
+          <div class="trust-badge"><span class="trust-badge-icon">💯</span><span class="trust-badge-text">أسعار شفافة بلا مفاجآت</span></div>
+          <div class="trust-badge"><span class="trust-badge-icon">📍</span><span class="trust-badge-text">نخدم جميع أحياء القصيم</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="section-label">تجارب عملائنا</div>
+      <div class="section-title"><span class="gradient-text">ماذا</span> يقولون عنا</div>
+      <div class="testi-scroll">
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">خدمة ممتازة جداً! الفنيين محترفين وأمانة عالية في العمل. صيانة مكيف بيتنا في بريدة وطلعت كأنها جديدة. شكراً فيكسيجو.</p>
+          <div class="testi-author"><div class="testi-avatar">ف</div><div><div class="testi-name">فهد العتيبي</div><div class="testi-city">بريدة</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">ركبوا لنا ٤ مكيفات في المنزل بسرعة واحترافية. السعر منطقي والعمل نظيف ومرتب. أنصح الكل بفيكسيجو في عنيزة.</p>
+          <div class="testi-author"><div class="testi-avatar">م</div><div><div class="testi-name">محمد الشمري</div><div class="testi-city">عنيزة</div></div></div>
+        </div>
+        <div class="testi-card">
+          <div class="testi-stars">★★★★★</div>
+          <p class="testi-text">اتصلت بهم طوارئ الساعة 11 ليلاً والمكيف خربان. جاوا خلال ساعة وصلحوه. ما قصروا ابداً، خدمة من ذهب.</p>
+          <div class="testi-author"><div class="testi-avatar">ن</div><div><div class="testi-name">نورة الزهراني</div><div class="testi-city">الرس</div></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section style="padding-top:0">
+      <div class="cta-section">
+        <h2>جاهزون لخدمتك الآن 🎯</h2>
+        <p>لا تتردد في التواصل معنا. فريقنا المتخصص على أهبة الاستعداد لحل أي مشكلة تبريد لديك في أسرع وقت.</p>
+        <div class="cta-phone">📞 0558524317</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="tel:0558524317" class="btn-primary" style="background:rgba(255,255,255,0.25);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,0.4)">📞 اتصل الآن</a>
+          <a href="https://wa.me/966558524317" class="btn-wa">💬 واتساب مباشر</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">فيكسيجو</div>
+      <p class="footer-desc">شركة فيكسيجو — المتخصصة في صيانة وتركيب وتنظيف المكيفات بمنطقة القصيم. نلتزم بأعلى معايير الجودة والاحترافية.</p>
+      <p class="footer-areas">نخدم: بريدة • عنيزة • البكيرية • الرس • الأسياح • عيون الجواء</p>
+      <div class="footer-bottom">© 2025 فيكسيجو — جميع الحقوق محفوظة</div>
+    </footer>
+  </div>
+</div>
+
+<!-- ============ PAGE: SERVICES ============ -->
+<div class="page" id="page-services">
+  <div class="hero-wrap">
+    <section class="services-hero">
+      <div class="section-label">ما نقدمه لك</div>
+      <h1>خدماتنا <span style="color:var(--cyan)">الاحترافية</span></h1>
+      <p>باقة متكاملة من خدمات التبريد بأيدي فنيين معتمدين في القصيم.</p>
+    </section>
+
+    <section>
+      <div class="svc-full-card">
+        <div class="svc-full-header" style="background:linear-gradient(135deg,#1d4ed8,#2563eb)">
+          <h2>🔧 صيانة المكيفات</h2>
+          <p>الصيانة الدورية هي الاستثمار الأذكى لإطالة عمر مكيفك وضمان كفاءته</p>
+        </div>
+        <div class="svc-full-body">
+          <p class="svc-desc">مكيفك يستحق أفضل رعاية ممكنة، وفريقنا في فيكسيجو يحرص على تقديم خدمة صيانة شاملة ومتكاملة تضمن لك راحة البال طوال العام. نعتمد في صيانتنا على أحدث الأجهزة التشخيصية وقطع الغيار الأصلية المعتمدة من الشركات المصنعة، مما يضمن أداءً استثنائياً لمكيفك على مدار الفصول. خبراتنا تمتد عبر سنوات من العمل المتواصل في منطقة القصيم، من بريدة إلى عنيزة والرس والبكيرية، حيث بنينا سمعة راسخة قائمة على الجودة والأمانة والالتزام.</p>
+          <div class="svc-features">
+            <div class="svc-feature">فحص شامل لجميع مكونات المكيف الداخلية والخارجية</div>
+            <div class="svc-feature">تنظيف الفلاتر والمكثفات والمبخرات</div>
+            <div class="svc-feature">قياس ضغط الفريون وإعادة التعبئة عند الحاجة</div>
+            <div class="svc-feature">فحص التوصيلات الكهربائية وأحزمة التشغيل</div>
+            <div class="svc-feature">اختبار كفاءة التبريد والتحقق من درجات الحرارة</div>
+            <div class="svc-feature">تقرير مفصل بحالة الجهاز وتوصيات الصيانة</div>
+          </div>
+          <div class="svc-price-badge">✦ أسعار مناسبة وشفافة · اتصل للاستفسار</div>
+        </div>
+      </div>
+
+      <div class="svc-full-card">
+        <div class="svc-full-header" style="background:linear-gradient(135deg,#0891b2,#06b6d4)">
+          <h2>⚙️ فك وتركيب المكيفات</h2>
+          <p>تركيب احترافي يضمن الأداء المثالي والعمر الأطول لجهازك</p>
+        </div>
+        <div class="svc-full-body">
+          <p class="svc-desc">التركيب الصحيح هو أساس أداء المكيف الجيد، وفريق فيكسيجو يعي ذلك جيداً. نقدم خدمة فك وتركيب المكيفات بمعايير هندسية دقيقة تضمن أفضل توزيع للهواء البارد وأعلى كفاءة تشغيلية. سواء كنت في بريدة أو عنيزة أو الأسياح أو عيون الجواء، فريقنا المتنقل يصل إليك في أسرع وقت بمعداته الكاملة لإنجاز المهمة بإتقان.</p>
+          <div class="svc-features">
+            <div class="svc-feature">تركيب جميع أنواع المكيفات: سبليت، شباك، مخفي، مركزي</div>
+            <div class="svc-feature">اختيار أفضل موقع للتركيب لضمان توزيع مثالي للهواء</div>
+            <div class="svc-feature">تمديد نحاسي وعزل احترافي عالي الجودة</div>
+            <div class="svc-feature">تركيب مستوعب الصرف الصحيح بإحكام تام</div>
+            <div class="svc-feature">اختبار شامل بعد التركيب للتأكد من سلامة التشغيل</div>
+            <div class="svc-feature">ضمان على عملية التركيب لمدة كافية</div>
+          </div>
+          <div class="svc-price-badge">✦ نأتي إليك في القصيم · احجز الآن</div>
+        </div>
+      </div>
+
+      <div class="svc-full-card">
+        <div class="svc-full-header" style="background:linear-gradient(135deg,#0f766e,#0891b2)">
+          <h2>💧 غسيل وتنظيف المكيفات</h2>
+          <p>هواء نقي وصحي لعائلتك بتنظيف عميق واحترافي</p>
+        </div>
+        <div class="svc-full-body">
+          <p class="svc-desc">المكيف غير النظيف ليس فقط مصدراً للهواء الملوث، بل يستهلك طاقة أكثر ويتعطل بسرعة أكبر. خدمة غسيل وتنظيف فيكسيجو تتجاوز التنظيف السطحي لتصل إلى الأجزاء الداخلية العميقة باستخدام معدات ضغط الماء المتخصصة والمواد المعقمة الآمنة على الصحة. عائلتك في بريدة أو الرس أو البكيرية تستحق هواءً نقياً خالياً من البكتيريا والفطريات والغبار المتراكم.</p>
+          <div class="svc-features">
+            <div class="svc-feature">تنظيف الفلاتر بضغط الماء والمواد المخصصة</div>
+            <div class="svc-feature">تعقيم الوحدة الداخلية والخارجية بالكامل</div>
+            <div class="svc-feature">إزالة الغبار والبكتيريا والروائح الكريهة</div>
+            <div class="svc-feature">تنظيف مواسير الصرف ومنع انسداداتها</div>
+            <div class="svc-feature">استخدام مواد آمنة معتمدة صحياً ومبيدات للجراثيم</div>
+            <div class="svc-feature">تحسين كفاءة التبريد وتوفير الطاقة الكهربائية</div>
+          </div>
+          <div class="svc-price-badge">✦ تنظيف عميق · هواء نقي · أسعار تنافسية</div>
+        </div>
+      </div>
+
+      <div class="svc-full-card">
+        <div class="svc-full-header" style="background:linear-gradient(135deg,#7c3aed,#4f46e5)">
+          <h2>❄️ تعبئة فريون</h2>
+          <p>استعد برودة مكيفك القوية بتعبئة فريون صحيحة وآمنة</p>
+        </div>
+        <div class="svc-full-body">
+          <p class="svc-desc">نقص الفريون هو أحد أكثر مشاكل المكيفات شيوعاً في المناخ الحار لمنطقة القصيم، وإذا لم يُعالج بشكل صحيح فقد يتسبب في تلف الضاغط وهو الجزء الأغلى في المكيف. فريق فيكسيجو يمتلك الأجهزة والخبرة الكافية للكشف الدقيق عن مستوى الفريون وتحديد سبب النقص وإصلاح أي تسريب قبل إجراء التعبئة.</p>
+          <div class="svc-features">
+            <div class="svc-feature">فحص دقيق لمستوى الفريون بالأجهزة التخصصية</div>
+            <div class="svc-feature">اكتشاف وإصلاح تسريبات الفريون بشكل كامل</div>
+            <div class="svc-feature">تعبئة بالنوع الصحيح من الفريون المناسب لجهازك</div>
+            <div class="svc-feature">إعادة اختبار الأداء بعد التعبئة للتأكد من الكفاءة</div>
+          </div>
+          <div class="svc-price-badge">✦ تعبئة احترافية · جميع أنواع الفريون</div>
+        </div>
+      </div>
+
+      <div class="svc-full-card">
+        <div class="svc-full-header" style="background:linear-gradient(135deg,#dc2626,#ea580c)">
+          <h2>🔍 كشف الأعطال</h2>
+          <p>تشخيص دقيق وسريع لكل مشاكل التبريد</p>
+        </div>
+        <div class="svc-full-body">
+          <p class="svc-desc">خبرتنا الطويلة في القصيم علمتنا أن التشخيص الدقيق هو نصف الحل. فريق فيكسيجو يستخدم أحدث أجهزة الكشف الإلكتروني لتحديد مصدر العطل بدقة عالية دون تجريب عشوائي أو تغيير قطع غير ضرورية. نوفر تقريراً شفافاً بنتائج الفحص وتكلفة الإصلاح قبل البدء.</p>
+          <div class="svc-features">
+            <div class="svc-feature">فحص شامل للدوائر الكهربائية والإلكترونية</div>
+            <div class="svc-feature">تشخيص مشاكل الضاغط والمكثف والمبخر</div>
+            <div class="svc-feature">كشف أعطال الريموت وبورد التحكم</div>
+            <div class="svc-feature">تقرير مفصل وشفاف بالعطل والتكلفة</div>
+          </div>
+          <div class="svc-price-badge">✦ تشخيص دقيق · سعر معقول</div>
+        </div>
+      </div>
+
+      <div class="svc-full-card">
+        <div class="svc-full-header" style="background:linear-gradient(135deg,#b45309,#d97706)">
+          <h2>⚡ الصيانة الطارئة</h2>
+          <p>متاحون 24 ساعة · 7 أيام · حتى في أشد الليالي حراً</p>
+        </div>
+        <div class="svc-full-body">
+          <p class="svc-desc">نعلم أن عطل المكيف في صيف القصيم ليس أمراً يحتمل الانتظار. لهذا أبقينا خط الطوارئ مفتوحاً على مدار الساعة طوال أيام الأسبوع. سواء كنت في بريدة أو عنيزة أو عيون الجواء أو الأسياح، يصل إليك فريقنا خلال أقصر وقت ممكن مع كامل المعدات والقطع الضرورية لإنجاز الإصلاح في نفس الزيارة.</p>
+          <div class="svc-features">
+            <div class="svc-feature">استجابة فورية خلال 60 دقيقة أو أقل</div>
+            <div class="svc-feature">فريق مستعد على مدار 24 ساعة كل يوم</div>
+            <div class="svc-feature">سيارات مجهزة بالقطع الأكثر شيوعاً</div>
+            <div class="svc-feature">حل المشكلة من الزيارة الأولى في معظم الحالات</div>
+          </div>
+          <div class="svc-price-badge">⚡ اتصل الآن: 0558524317</div>
+        </div>
+      </div>
+
+      <div class="areas-section">
+        <div class="section-label" style="color:rgba(6,182,212,0.9)">نطاق الخدمة</div>
+        <div class="section-title" style="color:#fff">نخدم كل <span style="color:var(--cyan)">القصيم</span></div>
+        <div class="areas-grid">
+          <div class="area-pill">📍 بريدة</div>
+          <div class="area-pill">📍 عنيزة</div>
+          <div class="area-pill">📍 البكيرية</div>
+          <div class="area-pill">📍 الرس</div>
+          <div class="area-pill">📍 الأسياح</div>
+          <div class="area-pill">📍 عيون الجواء</div>
+        </div>
+      </div>
+
+      <div class="cta-section" style="margin-bottom:24px">
+        <h2>احجز خدمتك الآن 🛠️</h2>
+        <p>تواصل معنا وسيصلك فنيينا المعتمدين في أسرع وقت</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="tel:0558524317" class="btn-primary" style="background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4)">📞 0558524317</a>
+          <a href="https://wa.me/966558524317" class="btn-wa">💬 واتساب</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">فيكسيجو</div>
+      <p class="footer-desc">المتخصصون في صيانة وتركيب وتنظيف المكيفات في منطقة القصيم.</p>
+      <p class="footer-areas">بريدة • عنيزة • البكيرية • الرس • الأسياح • عيون الجواء</p>
+      <div class="footer-bottom">© 2025 فيكسيجو — جميع الحقوق محفوظة</div>
+    </footer>
+  </div>
+</div>
+
+<!-- ============ PAGE: ABOUT ============ -->
+<div class="page" id="page-about">
+  <div class="hero-wrap">
+    <section class="about-hero">
+      <div class="section-label">قصتنا</div>
+      <h1>من نحن؟<br><span class="gradient-text">فيكسيجو</span></h1>
+      <p>أكثر من مجرد شركة صيانة — نحن شركاء في راحتك طوال العام.</p>
+    </section>
+
+    <section>
+      <div class="story-card">
+        <h2>🌟 قصة البداية</h2>
+        <p>انطلقت فيكسيجو من رحم الشغف بالتميز والرغبة الحقيقية في خدمة أهل القصيم بأفضل مستوى ممكن. رأى مؤسسو الشركة الفجوة الكبيرة بين ما يستحقه المواطن من خدمات احترافية وما كان متاحاً في السوق المحلي، فقرروا ملء هذا الفراغ بشركة متخصصة تضع الجودة والأمانة فوق كل اعتبار. اليوم، وبعد سنوات من العمل المتواصل، أصبحت فيكسيجو الاسم الأول الذي تتذكره عائلات القصيم عند أي مشكلة في التبريد.</p>
+      </div>
+
+      <div class="story-card">
+        <h2>🎯 رؤيتنا</h2>
+        <p>نسعى لأن نكون الشركة الرائدة في خدمات التبريد والتكييف على مستوى منطقة القصيم بأكملها، من خلال تقديم خدمات تتجاوز توقعات عملائنا وبناء علاقات طويلة الأمد قائمة على الثقة المتبادلة والجودة الحقيقية. نؤمن بأن كل عميل يستحق خدمة ملكية بأسعار عادلة وشفافة.</p>
+      </div>
+
+      <div class="section-label" style="margin-top:20px">قيمنا الجوهرية</div>
+      <div class="section-title"><span class="gradient-text">ما يميزنا</span> عن غيرنا</div>
+      <div class="values-grid">
+        <div class="value-card">
+          <div class="value-icon">🏆</div>
+          <div class="value-title">الجودة أولاً</div>
+          <div class="value-desc">لا نقبل بأقل من الأفضل في كل خدمة نقدمها</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🤝</div>
+          <div class="value-title">الأمانة</div>
+          <div class="value-desc">شفافية تامة في الأسعار وصدق في التشخيص</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">⚡</div>
+          <div class="value-title">السرعة</div>
+          <div class="value-desc">نحترم وقتك ونلتزم بالمواعيد المحددة</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">🔬</div>
+          <div class="value-title">الاحترافية</div>
+          <div class="value-desc">فنيون مدربون بأحدث التقنيات العالمية</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">💡</div>
+          <div class="value-title">الابتكار</div>
+          <div class="value-desc">نواكب أحدث تقنيات التبريد الذكي</div>
+        </div>
+        <div class="value-card">
+          <div class="value-icon">❤️</div>
+          <div class="value-title">خدمة القلب</div>
+          <div class="value-desc">نعامل كل عميل كأنه من عائلتنا</div>
+        </div>
+      </div>
+
+      <div class="about-stats">
+        <div class="about-stat"><div class="about-stat-num">+3000</div><div class="about-stat-lbl">عميل سعيد</div></div>
+        <div class="about-stat"><div class="about-stat-num">+10</div><div class="about-stat-lbl">سنوات خبرة</div></div>
+        <div class="about-stat"><div class="about-stat-num">6</div><div class="about-stat-lbl">مدن خدمة</div></div>
+        <div class="about-stat"><div class="about-stat-num">98%</div><div class="about-stat-lbl">رضا العملاء</div></div>
+      </div>
+
+      <div style="margin-top:28px">
+        <div class="story-card">
+          <h2>📜 معاييرنا وضماناتنا</h2>
+          <p>تعمل فيكسيجو وفق أعلى معايير الجودة في صناعة التبريد والتكييف. فريقنا الفني يخضع لتدريب مستمر على أحدث التقنيات والأجهزة. نستخدم فقط قطع الغيار الأصلية والمعتمدة، ونقدم ضماناً حقيقياً على جميع الخدمات التي ننجزها. ثقتك أمانة في أعناقنا، وسمعتنا التي بنيناها على مدار سنوات هي خير شاهد على التزامنا بهذه المعايير الصارمة في بريدة وعنيزة وسائر مدن القصيم.</p>
+        </div>
+      </div>
+
+      <div class="cta-section" style="margin-bottom:24px">
+        <h2>تعرف علينا أكثر 🤝</h2>
+        <p>تواصل معنا واكتشف الفرق الحقيقي الذي تصنعه فيكسيجو في خدمات التبريد</p>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <button class="btn-primary" onclick="navigate('contact')" style="background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4)">📬 تواصل معنا</button>
+          <a href="https://wa.me/966558524317" class="btn-wa">💬 واتساب</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">فيكسيجو</div>
+      <p class="footer-desc">نبني ثقة دائمة مع عملائنا من خلال الجودة والأمانة والاحترافية في كل خدمة.</p>
+      <p class="footer-areas">بريدة • عنيزة • البكيرية • الرس • الأسياح • عيون الجواء</p>
+      <div class="footer-bottom">© 2025 فيكسيجو — جميع الحقوق محفوظة</div>
+    </footer>
+  </div>
+</div>
+
+<!-- ============ PAGE: CONTACT ============ -->
+<div class="page" id="page-contact">
+  <div class="hero-wrap">
+    <section class="contact-hero">
+      <div class="section-label">نحن هنا لك</div>
+      <h1>تواصل <span class="gradient-text">معنا</span></h1>
+      <p>فريقنا جاهز للرد على استفساراتك وحجز خدمتك في أسرع وقت ممكن.</p>
+    </section>
+
+    <section>
+      <div class="contact-card">
+        <h3>📞 طرق التواصل</h3>
+        <div class="contact-method">
+          <div class="contact-method-icon cm-blue">📞</div>
+          <div class="contact-method-info">
+            <div class="contact-method-label">الهاتف المباشر</div>
+            <div class="contact-method-value">0558524317</div>
+          </div>
+          <a href="tel:0558524317" style="background:var(--blue);color:#fff;padding:10px 18px;border-radius:12px;font-size:.82rem;font-weight:600;text-decoration:none;white-space:nowrap">اتصل</a>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon cm-green">💬</div>
+          <div class="contact-method-info">
+            <div class="contact-method-label">واتساب</div>
+            <div class="contact-method-value">+966558524317</div>
+          </div>
+          <a href="https://wa.me/966558524317" style="background:#25d366;color:#fff;padding:10px 18px;border-radius:12px;font-size:.82rem;font-weight:600;text-decoration:none;white-space:nowrap">راسل</a>
+        </div>
+        <div class="contact-method">
+          <div class="contact-method-icon cm-blue">📍</div>
+          <div class="contact-method-info">
+            <div class="contact-method-label">منطقة الخدمة</div>
+            <div class="contact-method-value">منطقة القصيم</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <h3>⏰ أوقات العمل</h3>
+        <div class="hours-grid">
+          <div class="hour-row"><span class="hour-day">السبت — الخميس</span><span class="hour-time">7:00 ص — 11:00 م</span></div>
+          <div class="hour-row"><span class="hour-day">الجمعة</span><span class="hour-time">2:00 م — 11:00 م</span></div>
+          <div class="hour-row" style="border-bottom:none;background:rgba(37,99,235,0.04);border-radius:10px;padding:12px;margin-top:4px"><span class="hour-day" style="color:var(--blue);font-weight:600">🚨 الطوارئ</span><span class="hour-time">24/7 متاح دائماً</span></div>
+        </div>
+      </div>
+
+      <div class="contact-card">
+        <h3>📨 أرسل رسالة</h3>
+        <div class="form-group">
+          <label>الاسم الكريم</label>
+          <input type="text" placeholder="أدخل اسمك" id="cname">
+        </div>
+        <div class="form-group">
+          <label>رقم الجوال</label>
+          <input type="tel" placeholder="05xxxxxxxx" id="cphone">
+        </div>
+        <div class="form-group">
+          <label>المدينة</label>
+          <select id="ccity">
+            <option value="">اختر مدينتك</option>
+            <option>بريدة</option>
+            <option>عنيزة</option>
+            <option>البكيرية</option>
+            <option>الرس</option>
+            <option>الأسياح</option>
+            <option>عيون الجواء</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>الخدمة المطلوبة</label>
+          <select id="cservice">
+            <option value="">اختر الخدمة</option>
+            <option>صيانة المكيفات</option>
+            <option>فك وتركيب المكيفات</option>
+            <option>غسيل وتنظيف المكيفات</option>
+            <option>تعبئة فريون</option>
+            <option>كشف الأعطال</option>
+            <option>الصيانة الطارئة</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>ملاحظات إضافية</label>
+          <textarea placeholder="اكتب أي تفاصيل إضافية هنا..." id="cnotes"></textarea>
+        </div>
+        <button class="btn-primary" style="width:100%" onclick="sendWhatsApp()">📤 إرسال عبر واتساب</button>
+      </div>
+
+      <div class="contact-card">
+        <h3>📍 مناطق الخدمة</h3>
+        <div class="areas-grid" style="grid-template-columns:repeat(2,1fr)">
+          <div class="area-pill" style="background:rgba(37,99,235,0.07);border-color:rgba(37,99,235,0.2);color:var(--blue)">📍 بريدة</div>
+          <div class="area-pill" style="background:rgba(37,99,235,0.07);border-color:rgba(37,99,235,0.2);color:var(--blue)">📍 عنيزة</div>
+          <div class="area-pill" style="background:rgba(37,99,235,0.07);border-color:rgba(37,99,235,0.2);color:var(--blue)">📍 البكيرية</div>
+          <div class="area-pill" style="background:rgba(37,99,235,0.07);border-color:rgba(37,99,235,0.2);color:var(--blue)">📍 الرس</div>
+          <div class="area-pill" style="background:rgba(37,99,235,0.07);border-color:rgba(37,99,235,0.2);color:var(--blue)">📍 الأسياح</div>
+          <div class="area-pill" style="background:rgba(37,99,235,0.07);border-color:rgba(37,99,235,0.2);color:var(--blue)">📍 عيون الجواء</div>
+        </div>
+      </div>
+
+      <div class="cta-section" style="margin-bottom:24px">
+        <h2>لا تتردد في الاتصال 📲</h2>
+        <p>خدمتك هي أولويتنا وفريقنا في انتظار مكالمتك</p>
+        <div class="cta-phone">0558524317</div>
+        <div style="display:flex;flex-direction:column;gap:12px">
+          <a href="tel:0558524317" class="btn-primary" style="background:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.4)">📞 اتصل الآن</a>
+          <a href="https://wa.me/966558524317" class="btn-wa">💬 واتساب مباشر</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="footer-logo">فيكسيجو</div>
+      <p class="footer-desc">تواصل معنا في أي وقت وسنكون سعداء بخدمتك في جميع أنحاء القصيم.</p>
+      <p class="footer-areas">بريدة • عنيزة • البكيرية • الرس • الأسياح • عيون الجواء</p>
+      <div class="footer-bottom">© 2025 فيكسيجو — جميع الحقوق محفوظة</div>
+    </footer>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="bnav-item active" id="bn-home" onclick="navigate('home')">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+    <span>الرئيسية</span>
+  </button>
+  <button class="bnav-item" id="bn-services" onclick="navigate('services')">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93l-1.41 1.41M21 12h-2M19.07 19.07l-1.41-1.41M12 21v-2M4.93 19.07l1.41-1.41M3 12h2M4.93 4.93l1.41 1.41"/></svg>
+    <span>خدماتنا</span>
+  </button>
+  <button class="bnav-item" id="bn-about" onclick="navigate('about')">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+    <span>من نحن</span>
+  </button>
+  <button class="bnav-item" id="bn-contact" onclick="navigate('contact')">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 .84h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 8.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
+    <span>تواصل</span>
+  </button>
+</div>
+
+<script>
+let currentPage='home';
+
+function navigate(page){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.bnav-item').forEach(b=>b.classList.remove('active'));
+  document.getElementById('bn-'+page).classList.add('active');
+  document.querySelectorAll('.mobile-menu a').forEach(a=>a.classList.remove('active'));
+  currentPage=page;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const burger=document.getElementById('burger');
+const menu=document.getElementById('mobileMenu');
+burger.addEventListener('click',()=>{
+  burger.classList.toggle('open');
+  menu.classList.toggle('open');
+});
+
+function closeMobileMenu(){
+  burger.classList.remove('open');
+  menu.classList.remove('open');
+}
+
+function sendWhatsApp(){
+  const name=document.getElementById('cname').value||'غير محدد';
+  const phone=document.getElementById('cphone').value||'غير محدد';
+  const city=document.getElementById('ccity').value||'غير محدد';
+  const service=document.getElementById('cservice').value||'غير محدد';
+  const notes=document.getElementById('cnotes').value||'لا توجد';
+  const msg=`مرحباً فيكسيجو 👋\n\nالاسم: ${name}\nالجوال: ${phone}\nالمدينة: ${city}\nالخدمة: ${service}\nملاحظات: ${notes}`;
+  window.open('https://wa.me/966558524317?text='+encodeURIComponent(msg),'_blank');
+}
+</script>
+</body>
+</html>
